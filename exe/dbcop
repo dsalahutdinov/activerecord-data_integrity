@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require "bundler/setup"
-require "dbcop"
+require 'bundler/setup'
+require 'dbcop'
 
 Dbcop.execute

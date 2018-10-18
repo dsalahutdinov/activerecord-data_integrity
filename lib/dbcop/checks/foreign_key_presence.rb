@@ -58,7 +58,6 @@ module Dbcop
     
     results << res
     rescue NameError => e
-      byebug
       logger.error("Error processing #{model.name}.#{reflection.name}")
       logger.error(e.to_s)
     end
