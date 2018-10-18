@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'dbcop/version'
 require 'active_record'
 require 'dbcop/cli'
