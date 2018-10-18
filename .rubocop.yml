@@ -1,0 +1,10 @@
+inherit_from: .rubocop_todo.yml
+
+require: rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 2.3
+  TargetRailsVersion: 4.0
+  Exclude:
+    - 'dbcop.gemspec'
+

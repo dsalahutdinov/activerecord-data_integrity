@@ -3,8 +3,6 @@
 require 'rake'
 require 'rake/tasklib'
 
-# APP_PATH = File.expand_path('config/application', Dir.pwd) unless defined? APP_PATH
-
 module Dbcop
   class RakeTask < Rake::TaskLib
     def initialize(name = :dbcop, *args)
