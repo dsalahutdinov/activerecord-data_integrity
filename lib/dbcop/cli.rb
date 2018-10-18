@@ -6,8 +6,10 @@ module Dbcop
 
     def run
       # Rails load ugly hack :)
+      require File.expand_path('config/environment', Dir.pwd)
       Kernel.const_set(:APP_PATH, File.expand_path('config/application', Dir.pwd))
       Rails.application.eager_load!
+      Rails.logger.level = 4
 
       checks = [Dbcop::Checks::TablePresence, Dbcop::Checks::ForeignKeyPresence]
       results = []
@@ -18,8 +20,10 @@ module Dbcop
       strio = StringIO.new
       logger = Logger.new strio
 
-      ActiveRecord::Base.descendants.each do |model|
-        checks.each do |check|
+      checks.each do |check|
+        logger.info(check.name)
+
+        ActiveRecord::Base.descendants.each do |model|
           results << check.new(model, logger).call
         end
       end

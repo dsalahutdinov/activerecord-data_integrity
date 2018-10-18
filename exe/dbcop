@@ -4,4 +4,4 @@
 require 'bundler/setup'
 require 'dbcop'
 
-Dbcop.execute
+Dbcop::CLI.new.run
