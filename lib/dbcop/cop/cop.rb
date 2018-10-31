@@ -8,9 +8,9 @@ module Dbcop
     def initialize(model)
       @model = model
     end
-    
+
     def name
-      self.class.name.gsub("Dbcop::", "").gsub("::","/")
+      self.class.name.gsub('Dbcop::', '').gsub('::', '/')
     end
   end
 end

@@ -25,7 +25,9 @@ module Dbcop
       end
 
       collectors.each do |collector|
-        puts "#{Rainbow(collector.cop.name).red}: #{Rainbow(collector.cop.model.name).yellow} #{collector.data.first}" unless collector.data.empty?
+        next if collector.data.empty?
+
+        puts "#{Rainbow(collector.cop.name).red}: #{Rainbow(collector.cop.model.name).yellow} #{collector.data.first}"
       end
 
       exit(1) if results.include?(false)

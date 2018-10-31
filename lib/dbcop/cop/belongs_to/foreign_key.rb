@@ -30,7 +30,9 @@ module Dbcop
               c.column_name == fk && c.references_field == 'id'
           end
           if logger && !res
-            logger.info("belongs_to #{reflection.name} but has no foreign key to #{references_table}.id")
+            logger.info(
+              "belongs_to #{reflection.name} but has no foreign key to #{references_table}.id"
+            )
           end
         rescue NameError
           logger.info("Error processing #{model.name}.#{reflection.name}")
