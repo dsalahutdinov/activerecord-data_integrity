@@ -3,11 +3,14 @@
 module Dbcop
   # Checking cop base class
   class Cop
-    attr_reader :model, :logger
+    attr_reader :model
 
-    def initialize(model, logger = nil)
+    def initialize(model)
       @model = model
-      @logger = logger
+    end
+    
+    def name
+      self.class.name.gsub("Dbcop::", "").gsub("::","/")
     end
   end
 end

@@ -6,13 +6,13 @@ module Dbcop
   module BelongsTo
     # Checks foreign key presence to the parent table of belongs_to association
     class ForeignKey < Cop
-      def call
+      def call(logger = nil)
         results = []
 
         model._reflections.select { |_k, v| v.is_a?(ActiveRecord::Reflection::BelongsToReflection) }.each do |_name, reflection|
           next if reflection.polymorphic?
 
-          results << validate(reflection)
+          results << validate(reflection, logger)
         end
 
         results.include?(false) ? false : true
@@ -20,7 +20,7 @@ module Dbcop
 
       private
 
-      def validate(reflection)
+      def validate(reflection, logger)
         begin
           references_table = reflection.class_name.constantize.table_name
 
@@ -29,10 +29,11 @@ module Dbcop
             c.table_name == model.table_name && c.references_table == references_table &&
               c.column_name == fk && c.references_field == 'id'
           end
-          logger.warn("#{model.name} belongs_to #{reflection.name} but has no fk") if logger && !res
-        rescue NameError => e
-          logger.error("Error processing #{model.name}.#{reflection.name}")
-          logger.error(e.to_s)
+          if logger && !res
+            logger.info("belongs_to #{reflection.name} but has no foreign key to #{references_table}.id")
+          end
+        rescue NameError
+          logger.info("Error processing #{model.name}.#{reflection.name}")
         end
 
         res

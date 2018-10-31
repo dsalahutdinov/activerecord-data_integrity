@@ -1,26 +1,27 @@
 # Dbcop
 
-Dbcop is the cli tool to analyize the data integrity of your Rails application.
-It can automatically find out the lack of foreign keys in the database and many other dismisses.
+Data integrty analisys cli tool for Rails application.
+Out of the box it will enforce many data integrity issus such as the lack of foreign keys.
 
-Add this line to your application's Gemfile:
+Supports only Rails 5.2 and PostgSql for now.
 
+## Intallation
 ```ruby
 gem 'dbcop', group: :development
 ```
-## Run
-
-Execute:
-```bash
-bundle exec dbcop
+## Quickstart
+Just type `dbcop` in a Rails project's folder:
 ```
+$ cd my/cool/ruby/project
+$ dbcop
+```
+
 and you would get someting like this:
 ```
-'Model User belongs to Account but has no foreign key'
+BelongsTo/ForeignKey: Label belongs_to project but has no foreign key to projects.id
+Accordance/TablePresence: Stat::Hourly has no underlying table hourly_stats
+...
 ```
-
-Thats will make you be informed of lack of the foreign keys. :)
-
 
 ## Contributing
 
