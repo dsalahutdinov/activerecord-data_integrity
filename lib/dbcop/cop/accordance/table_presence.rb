@@ -4,6 +4,7 @@ require_relative '../cop'
 
 module Dbcop
   module Accordance
+    # Check the presence of the underlying table for the model
     class TablePresence < Cop
       def call
         result = ActiveRecord::Base.connection.table_exists?(model.table_name)
