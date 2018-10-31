@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Dbcop::Checks::TablePresence do
+RSpec.describe Dbcop::Accordance::TablePresence do
   describe '#call' do
     context 'when model has it own table' do
       let(:result) { described_class.new(NoTableModel).call }

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require_relative 'base'
+require_relative '../cop'
 
 module Dbcop
-  module Checks
+  module BelongsTo
     # Checks foreign key presence to the parent table of belongs_to association
-    class BelongsTo < Base
+    class ForeignKey < Cop
       def call
         results = []
 

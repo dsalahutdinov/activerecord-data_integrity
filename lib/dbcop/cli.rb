@@ -11,7 +11,7 @@ module Dbcop
       Rails.application.eager_load!
       Rails.logger.level = 4
 
-      checks = [Dbcop::Checks::TablePresence, Dbcop::Checks::BelongsTo]
+      checks = [Dbcop::Accordance::TablePresence, Dbcop::BelongsTo::ForeignKey]
       results = []
 
       require 'stringio'
