@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe Dbcop::Checks::ForeignKeyPresence do
+RSpec.describe Dbcop::Checks::BelongsTo do
   describe '#call' do
     context 'when there is fereign key to the parent table' do
       let(:result) do

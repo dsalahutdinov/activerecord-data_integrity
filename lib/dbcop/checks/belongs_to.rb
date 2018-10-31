@@ -4,7 +4,8 @@ require_relative 'base'
 
 module Dbcop
   module Checks
-    class ForeignKeyPresence < Base
+    # Checks foreign key presence to the parent table of belongs_to association
+    class BelongsTo < Base
       def call
         results = []
 
