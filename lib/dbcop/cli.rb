@@ -11,7 +11,7 @@ module Dbcop
       Rails.application.eager_load!
       Rails.logger.level = 0
 
-      resulsts = cops.map do |cop_class|
+      results = cops.map do |cop_class|
         ActiveRecord::Base.descendants.each do |model|
           cop_class.new(model).call
         end

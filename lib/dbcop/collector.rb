@@ -20,8 +20,12 @@ module Dbcop
           obj[item[:cop].name] << item
         end
 
-        obj.each do |cop_name, item|
-          puts "#{Rainbow(cop_name).red}: #{Rainbow(item[:cop].model.name).yellow} #{item[:message]}"
+        obj.each do |cop_name, items|
+          items.each do |item|
+            puts "#{Rainbow(cop_name).red}:"\
+                   " #{Rainbow(item[:cop].model.name).yellow}"\
+                   " #{item[:message]}"
+          end
         end
       end
 
