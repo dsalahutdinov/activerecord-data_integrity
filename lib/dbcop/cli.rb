@@ -11,19 +11,21 @@ module Dbcop
       Rails.application.eager_load!
       Rails.logger.level = 0
 
-      cop_classes = [Dbcop::Accordance::TablePresence, Dbcop::BelongsTo::ForeignKey]
-      results = []
-      collectors = []
-
-      cop_classes.each do |cop_class|
+      resulsts = cops.map do |cop_class|
         ActiveRecord::Base.descendants.each do |model|
-          resulsts << cop_class.new(model).call
+          cop_class.new(model).call
         end
       end
 
       Dbcop::Collector.render
 
       exit(1) if results.include?(false)
+    end
+
+    private
+
+    def cops
+      @cops ||= Dbcop::Cop.descendants
     end
   end
 end
