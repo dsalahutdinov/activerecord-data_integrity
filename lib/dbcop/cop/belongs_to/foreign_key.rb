@@ -6,43 +6,43 @@ module Dbcop
   module BelongsTo
     # Checks foreign key presence to the parent table of belongs_to association
     class ForeignKey < Cop
-      def call(logger = nil)
-        results = []
-
-        model._reflections.select { |_k, v| v.is_a?(ActiveRecord::Reflection::BelongsToReflection) }.each do |_name, reflection|
-          next if reflection.polymorphic?
-
-          results << validate(reflection, logger)
+      def call
+        results = associations.map do |association|
+          valid?(association)
         end
 
-        results.include?(false) ? false : true
+        results.none? { |value| !value }
       end
 
       private
 
-      def validate(reflection, logger)
+      def valid?(association)
         begin
-          references_table = reflection.class_name.constantize.table_name
+          to_table = association.class_name.constantize.table_name
 
-          fk = reflection.foreign_key
-          res = foreign_keys.any? do |c|
-            c.table_name == model.table_name && c.references_table == references_table &&
-              c.column_name == fk && c.references_field == 'id'
+          success = model.connection.foreign_keys(model.table_name).any? do |foreign_key|
+            foreign_key.to_table == to_table && foreign_key.options.fetch(:primary_key) == 'id'
           end
-          if logger && !res
-            logger.info(
-              "belongs_to #{reflection.name} but has no foreign key to #{references_table}.id"
-            )
+
+          success.tap do |success|
+            unless success
+              log(
+                "belongs_to #{association.name} but has no foreign key to #{to_table}.id"
+              )
+            end
+            progress(success ? '.' : 'F')
           end
         rescue NameError
-          logger.info("Error processing #{model.name}.#{reflection.name}")
+          log("Error processing #{model.name}.#{association.name}")
         end
-
-        res
       end
 
-      def foreign_keys
-        @foreign_keys ||= Dbcop::ForeignKey.of_table(model.table_name)
+      def associations
+        model
+          ._reflections
+          .values
+          .select { |association| association.is_a?(ActiveRecord::Reflection::BelongsToReflection) }
+          .reject(&:polymorphic?)
       end
     end
   end

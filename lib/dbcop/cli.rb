@@ -17,18 +17,11 @@ module Dbcop
 
       cop_classes.each do |cop_class|
         ActiveRecord::Base.descendants.each do |model|
-          cop = cop_class.new(model)
-          collector = Dbcop::Collector.new(cop)
-          collectors << collector
-          results << cop.call(collector)
+          resulsts << cop_class.new(model).call
         end
       end
 
-      collectors.each do |collector|
-        next if collector.data.empty?
-
-        puts "#{Rainbow(collector.cop.name).red}: #{Rainbow(collector.cop.model.name).yellow} #{collector.data.first}"
-      end
+      Dbcop::Collector.render
 
       exit(1) if results.include?(false)
     end

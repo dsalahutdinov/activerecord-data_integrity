@@ -12,5 +12,13 @@ module Dbcop
     def name
       self.class.name.gsub('Dbcop::', '').gsub('::', '/')
     end
+
+    def log(msg)
+      Dbcop::Collector.log(self, msg)
+    end
+
+    def progress(char)
+      Dbcop::Collector.progress(self, char)
+    end
   end
 end

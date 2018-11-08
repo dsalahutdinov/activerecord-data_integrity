@@ -3,15 +3,33 @@
 module Dbcop
   # collects result info for rendering
   class Collector
-    attr_reader :cop, :data
+    class << self
+      attr_reader :cop, :data
 
-    def initialize(cop)
-      @cop = cop
-      @data = []
-    end
+      def log(cop, message)
+        data.push(cop: cop, message: message)
+      end
 
-    def info(message)
-      data.push message
+      def progress(cop, char)
+        print char
+      end
+
+      def render
+        obj = data.each_with_object({}) do |item, obj|
+          obj[item[:cop].name] ||= []
+          obj[item[:cop].name] << item
+        end
+
+        obj.each do |cop_name, item|
+          puts "#{Rainbow(cop_name).red}: #{Rainbow(item[:cop].model.name).yellow} #{item[:message]}"
+        end
+      end
+
+      private
+
+      def data
+        @data ||= []
+      end
     end
   end
 end
