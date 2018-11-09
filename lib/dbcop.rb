@@ -12,5 +12,6 @@ require 'dbcop/cop/accordance/table_presence'
 require 'dbcop/cop/belongs_to/foreign_key'
 require 'dbcop/cop/validation/presence'
 
+# Base module for the gem
 module Dbcop
 end

@@ -4,6 +4,7 @@ require 'rake'
 require 'rake/tasklib'
 
 module Dbcop
+  # Main checking rake task
   class RakeTask < Rake::TaskLib
     def initialize(name = :dbcop, *args)
       desc 'Run DbCop' unless ::Rake.application.last_description

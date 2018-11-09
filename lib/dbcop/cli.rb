@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Dbcop
+  # CLI application class
   class CLI
     def initialize; end
 
