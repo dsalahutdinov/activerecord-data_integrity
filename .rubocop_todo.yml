@@ -9,7 +9,6 @@
 # Offense count: 2
 Metrics/AbcSize:
   Max: 43
-
 # Offense count: 1
 Metrics/CyclomaticComplexity:
   Max: 8
@@ -34,9 +33,3 @@ Style/Documentation:
     - 'lib/dbcop/checks/table_presence.rb'
     - 'lib/dbcop/cli.rb'
     - 'lib/dbcop/rake_task.rb'
-
-# Offense count: 4
-# Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
-# URISchemes: http, https
-Metrics/LineLength:
-  Max: 128

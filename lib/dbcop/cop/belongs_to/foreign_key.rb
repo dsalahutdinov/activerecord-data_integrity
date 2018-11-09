@@ -11,30 +11,24 @@ module Dbcop
           valid?(association)
         end
 
-        results.none? { |value| !value }
+        results.none?(&:!)
       end
 
       private
 
       def valid?(association)
-        begin
-          to_table = association.class_name.constantize.table_name
+        to_table = association.class_name.constantize.table_name
 
-          success = model.connection.foreign_keys(model.table_name).any? do |foreign_key|
-            foreign_key.to_table == to_table && foreign_key.options.fetch(:primary_key) == 'id'
-          end
-
-          success.tap do |success|
-            unless success
-              log(
-                "belongs_to #{association.name} but has no foreign key to #{to_table}.id"
-              )
-            end
-            progress(success ? '.' : 'F')
-          end
-        rescue NameError
-          log("Error processing #{model.name}.#{association.name}")
+        success = model.connection.foreign_keys(model.table_name).any? do |foreign_key|
+          foreign_key.to_table == to_table && foreign_key.options.fetch(:primary_key) == 'id'
         end
+
+        !success && log("belongs_to #{association.name} but has no foreign key to #{to_table}.id")
+        progress(success ? '.' : 'F')
+
+        success
+      rescue NameError
+        log("Error processing #{model.name}.#{association.name}")
       end
 
       def associations

@@ -8,3 +8,5 @@ AllCops:
   Exclude:
     - 'dbcop.gemspec'
 
+Metrics/LineLength:
+  Max: 128

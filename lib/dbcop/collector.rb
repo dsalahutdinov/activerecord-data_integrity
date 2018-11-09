@@ -4,20 +4,18 @@ module Dbcop
   # collects result info for rendering
   class Collector
     class << self
-      attr_reader :cop, :data
-
       def log(cop, message)
         data.push(cop: cop, message: message)
       end
 
-      def progress(cop, char)
+      def progress(_cop, char)
         print char
       end
 
       def render
-        obj = data.each_with_object({}) do |item, obj|
-          obj[item[:cop].name] ||= []
-          obj[item[:cop].name] << item
+        obj = data.each_with_object({}) do |item, hash|
+          hash[item[:cop].name] ||= []
+          hash[item[:cop].name] << item
         end
 
         obj.each do |cop_name, items|

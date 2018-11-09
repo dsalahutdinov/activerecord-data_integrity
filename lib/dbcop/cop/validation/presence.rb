@@ -13,23 +13,23 @@ module Dbcop
           end
         end.flatten
 
-        results.none? { |value| !value }
+        results.none?(&:!)
       end
-      
+
       private
 
       def valid?(attribute)
         column = model
-                  .connection
-                  .columns(model.table_name)
-                  .find { |column| column.name == attribute.to_s }
+                 .connection
+                 .columns(model.table_name)
+                 .find { |col| col.name == attribute.to_s }
         return true if column.nil?
 
         (!column.null).tap do |result|
           progress(result ? '.' : 'D')
           log("has nullable column #{attribute} with presence validation") unless result
         end
-     end
+      end
 
       def validators
         model

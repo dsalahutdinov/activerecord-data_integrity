@@ -4,7 +4,7 @@ require 'spec_helper'
 
 RSpec.describe Dbcop::Validation::Presence do
   describe '#call' do
-    context 'presence validation with nullable column' do
+    context 'when validation is present with nullable column' do
       let(:result) { described_class.new(User).call }
 
       it { expect(result).to be_falsey }
