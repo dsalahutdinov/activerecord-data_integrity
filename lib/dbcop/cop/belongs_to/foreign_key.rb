@@ -17,14 +17,12 @@ module Dbcop
       private
 
       def valid?(association)
-        to_table = association.class_name.constantize.table_name
-
-        success = model.connection.foreign_keys(model.table_name).any? do |foreign_key|
-          foreign_key.to_table == to_table && foreign_key.options.fetch(:primary_key) == 'id'
+        success = foreign_key?(association)
+        unless success
+          to_table = association.class_name.constantize.table_name
+          log("belongs_to #{association.name} but has no foreign key to #{to_table}.id")
         end
-
-        !success && log("belongs_to #{association.name} but has no foreign key to #{to_table}.id")
-        progress(success ? '.' : 'F')
+        progress(success, 'F')
 
         success
       rescue NameError
@@ -37,6 +35,13 @@ module Dbcop
           .values
           .select { |association| association.is_a?(ActiveRecord::Reflection::BelongsToReflection) }
           .reject(&:polymorphic?)
+      end
+
+      def foreign_key?(association)
+        to_table = association.class_name.constantize.table_name
+        model.connection.foreign_keys(model.table_name).any? do |foreign_key|
+          foreign_key.to_table == to_table && foreign_key.options.fetch(:primary_key) == 'id'
+        end
       end
     end
   end

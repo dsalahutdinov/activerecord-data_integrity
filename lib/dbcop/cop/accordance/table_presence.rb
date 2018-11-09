@@ -9,7 +9,7 @@ module Dbcop
       def call
         ActiveRecord::Base.connection.table_exists?(model.table_name).tap do |result|
           log("has no underlying table #{model.table_name}") unless result
-          progress(result ? '.' : 'T')
+          progress(result, 'T')
         end
       end
     end

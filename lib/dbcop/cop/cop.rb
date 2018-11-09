@@ -17,8 +17,8 @@ module Dbcop
       Dbcop::Collector.log(self, msg)
     end
 
-    def progress(char)
-      Dbcop::Collector.progress(self, char)
+    def progress(subresult, false_char = 'E')
+      Dbcop::Collector.progress(self, subresult ? '.' : false_char)
     end
   end
 end

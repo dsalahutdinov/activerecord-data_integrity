@@ -19,22 +19,24 @@ module Dbcop
       private
 
       def valid?(attribute)
-        column = model
-                 .connection
-                 .columns(model.table_name)
-                 .find { |col| col.name == attribute.to_s }
+        column = find_column
         return true if column.nil?
 
-        (!column.null).tap do |result|
-          progress(result ? '.' : 'D')
-          log("has nullable column #{attribute} with presence validation") unless result
-        end
+        progress(result, 'D')
+        !column && log("has nullable column #{attribute} with presence validation") unless result
       end
 
       def validators
         model
           .validators
           .select { |v| v.is_a?(ActiveRecord::Validations::PresenceValidator) }
+      end
+
+      def find_column(attribute)
+        model
+          .connection
+          .columns(model.table_name)
+          .find { |col| col.name == attribute.to_s }
       end
     end
   end

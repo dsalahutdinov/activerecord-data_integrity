@@ -1,5 +1,3 @@
-inherit_from: .rubocop_todo.yml
-
 require: rubocop-rspec
 
 AllCops:
@@ -7,6 +5,7 @@ AllCops:
   TargetRailsVersion: 4.0
   Exclude:
     - 'dbcop.gemspec'
+    - 'spec/support/*'
 
 Metrics/LineLength:
-  Max: 128
+  Max: 110

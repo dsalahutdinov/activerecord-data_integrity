@@ -13,12 +13,7 @@ module Dbcop
       end
 
       def render
-        obj = data.each_with_object({}) do |item, hash|
-          hash[item[:cop].name] ||= []
-          hash[item[:cop].name] << item
-        end
-
-        obj.each do |cop_name, items|
+        group_data_by_cop_name.each do |cop_name, items|
           items.each do |item|
             puts "#{Rainbow(cop_name).red}:"\
                    " #{Rainbow(item[:cop].model.name).yellow}"\
@@ -31,6 +26,13 @@ module Dbcop
 
       def data
         @data ||= []
+      end
+
+      def group_data_by_cop_name
+        data.each_with_object({}) do |item, hash|
+          hash[item[:cop].name] ||= []
+          hash[item[:cop].name] << item
+        end
       end
     end
   end
