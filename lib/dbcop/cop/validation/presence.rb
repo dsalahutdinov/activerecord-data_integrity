@@ -19,9 +19,10 @@ module Dbcop
       private
 
       def valid?(attribute)
-        column = find_column
+        column = find_column(attribute)
         return true if column.nil?
 
+        result = !column.null
         progress(result, 'D')
         !column && log("has nullable column #{attribute} with presence validation") unless result
       end
