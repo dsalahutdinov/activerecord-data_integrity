@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 ENV['RAILS_ENV'] ||= 'test'
-require 'bundler/setup'
 require 'dbcop'
 
 require 'dotenv/load'
 require 'byebug'
 
-Dir['spec/support/**/*.rb'].each { |f| require(File.expand_path(f)) }
-RailsInitializer.run
+require 'combustion'
+Combustion.initialize! :all,
+  database_reset: true, database_migrate: true, load_schema: false
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
