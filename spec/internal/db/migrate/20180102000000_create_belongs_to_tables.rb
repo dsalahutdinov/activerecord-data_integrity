@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateUserSettings < ActiveRecord::Migration[5.2]
+class CreateBelongsToTables < ActiveRecord::Migration[5.2]
   def change
     create_table :belongs_to_users, &:timestamps
 
@@ -10,6 +10,10 @@ class CreateUserSettings < ActiveRecord::Migration[5.2]
       t.text :data
 
       t.timestamps
+    end
+
+    create_table :belongs_to_user_unconstraintable do |t|
+      t.references :user, foreign_key: false
     end
   end
 end
