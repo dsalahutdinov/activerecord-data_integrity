@@ -10,6 +10,7 @@ require 'dbcop/collector'
 require 'dbcop/cop/accordance/table_presence'
 require 'dbcop/cop/belongs_to/foreign_key'
 require 'dbcop/cop/validation/presence'
+require 'dbcop/cop/validation/inclusion'
 
 # Base module for the gem
 module Dbcop

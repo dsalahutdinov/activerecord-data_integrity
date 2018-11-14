@@ -9,6 +9,14 @@ module Dbcop
       def call
         false
       end
+
+      private
+
+      def validators
+        model
+          .validators
+          .select { |v| v.is_a?(ActiveRecord::Validations::InclusionValidator) }
+      end
     end
   end
 end

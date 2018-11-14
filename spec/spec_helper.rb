@@ -8,7 +8,7 @@ require 'byebug'
 
 require 'combustion'
 Combustion.initialize! :all,
-  database_reset: true, database_migrate: true, load_schema: false
+                       database_reset: true, database_migrate: true, load_schema: false
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
