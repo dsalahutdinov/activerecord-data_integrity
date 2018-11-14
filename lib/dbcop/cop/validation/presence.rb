@@ -25,6 +25,7 @@ module Dbcop
         result = !column.null
         progress(result, 'D')
         !column && log("has nullable column #{attribute} with presence validation") unless result
+        result
       end
 
       def validators
@@ -34,8 +35,7 @@ module Dbcop
       end
 
       def find_column(attribute)
-        model
-          .connection
+        connection
           .columns(model.table_name)
           .find { |col| col.name == attribute.to_s }
       end

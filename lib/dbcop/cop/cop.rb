@@ -4,6 +4,7 @@ module Dbcop
   # Checking cop base class
   class Cop
     attr_reader :model
+    delegate :connection, to: :model
 
     def initialize(model)
       @model = model

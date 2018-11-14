@@ -7,7 +7,7 @@ module Dbcop
     # Check the presence of the underlying table for the model
     class TablePresence < Cop
       def call
-        ActiveRecord::Base.connection.table_exists?(model.table_name).tap do |result|
+        connection.table_exists?(model.table_name).tap do |result|
           log("has no underlying table #{model.table_name}") unless result
           progress(result, 'T')
         end

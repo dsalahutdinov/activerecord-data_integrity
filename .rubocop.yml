@@ -8,6 +8,7 @@ AllCops:
     - 'spec/support/*'
     - 'tmp/**/*'
     - 'gemfiles/*'
+    - 'spec/internal/**/*'
 
 Metrics/LineLength:
   Max: 110

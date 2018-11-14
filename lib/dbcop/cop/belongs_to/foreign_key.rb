@@ -39,7 +39,7 @@ module Dbcop
 
       def foreign_key?(association)
         to_table = association.class_name.constantize.table_name
-        model.connection.foreign_keys(model.table_name).any? do |foreign_key|
+        connection.foreign_keys(model.table_name).any? do |foreign_key|
           foreign_key.to_table == to_table && foreign_key.options.fetch(:primary_key) == 'id'
         end
       end
