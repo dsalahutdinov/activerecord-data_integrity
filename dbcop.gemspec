@@ -35,6 +35,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'pg'
   spec.add_runtime_dependency 'rainbow'
 
+  spec.add_development_dependency 'appraisal', '~> 2.2'
   spec.add_development_dependency 'bundler', '~> 1.16'
   spec.add_development_dependency 'combustion', '~> 1.0'
   spec.add_development_dependency 'rake', '~> 10.0'
@@ -44,5 +45,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-rspec'
 
   spec.add_development_dependency 'byebug'
-  spec.add_development_dependency 'dotenv'
 end

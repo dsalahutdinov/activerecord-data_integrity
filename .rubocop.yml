@@ -1,11 +1,13 @@
 require: rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.5
   TargetRailsVersion: 4.0
   Exclude:
     - 'dbcop.gemspec'
     - 'spec/support/*'
+    - 'tmp/**/*'
+    - 'gemfiles/*'
 
 Metrics/LineLength:
   Max: 110

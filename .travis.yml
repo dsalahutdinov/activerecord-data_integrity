@@ -1,7 +1,15 @@
-sudo: false
-language: ruby
-addons:
-  postgresql: '9.6'
-rvm:
-  - 2.5.1
-before_install: gem install bundler -v 1.16.1
+sudo: require
+
+services:
+  - docker
+
+install:
+  - gem install dip
+
+before_script:
+  - unset BUNDLE_GEMFILE
+  - dip provision
+
+script:
+  - dip rspec
+  - dip rubocop

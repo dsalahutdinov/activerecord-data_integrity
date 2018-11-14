@@ -1,4 +1,5 @@
 test:
   adapter: postgresql
-  encoding: unicode
-  database: <%= ENV.fetch("TEST_DATABASE") %>
+  host: <%= ENV.fetch("DB_HOST") %>
+  database: <%= ENV.fetch("DB_NAME") %>
+  username: <%= ENV.fetch("DB_USERNAME") %>
