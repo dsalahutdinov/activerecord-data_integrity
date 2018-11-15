@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'dbcop'
+require 'activerecord/data_integrity'
 
 require 'byebug'
 
