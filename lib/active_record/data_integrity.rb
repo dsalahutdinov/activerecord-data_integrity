@@ -15,8 +15,8 @@ require 'active_record/data_integrity/cop/validation/presence'
 require 'active_record/data_integrity/cop/validation/inclusion'
 require 'active_record/data_integrity/cop/has_many/foreign_key'
 
-# Base module for the gem
 module ActiveRecord
+  # Base module for the gem
   module DataIntegrity
   end
 end
