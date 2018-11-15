@@ -12,6 +12,7 @@ require 'dbcop/cop/accordance/primary_key'
 require 'dbcop/cop/belongs_to/foreign_key'
 require 'dbcop/cop/validation/presence'
 require 'dbcop/cop/validation/inclusion'
+require 'dbcop/cop/has_many/foreign_key'
 
 # Base module for the gem
 module Dbcop

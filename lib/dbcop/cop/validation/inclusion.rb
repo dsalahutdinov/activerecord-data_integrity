@@ -35,6 +35,8 @@ module Dbcop
       end
 
       def find_column(attribute)
+        return nil unless connection.table_exists?(model.table_name)
+
         connection
           .columns(model.table_name)
           .find { |col| col.name == attribute.to_s }

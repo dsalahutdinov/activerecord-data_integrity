@@ -15,6 +15,8 @@ module Dbcop
       private
 
       def valid?
+        return true unless connection.table_exists?(model.table_name)
+
         @valid ||= !connection.primary_keys(model.table_name).map! do |pk|
           column_valid?(pk)
         end.include?(false)
