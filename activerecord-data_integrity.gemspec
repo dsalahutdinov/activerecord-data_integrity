@@ -10,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Salahutdinov Dmitry']
   spec.email         = ['dsalahutdinov@gmail.com']
 
-  spec.summary       = 'Ruby project database linter'
-  spec.description   = 'Ruby project database linter'
+  spec.summary       = 'Checks your ActiveRecord models to match data integrity principles and rules'
+  spec.description   = 'CLI-tool to check data integrity of the Rails-application project'
   spec.homepage      = 'https://github.com/dsalahutdinov/dbcop'
   spec.license       = 'MIT'
 
