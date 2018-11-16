@@ -1,5 +1,5 @@
 [![Gem Version](https://badge.fury.io/rb/activerecord-data_integrity.svg)](https://badge.fury.io/rb/activerecord-data_integrity)
-[![Build Status](https://travis-ci.org/dsalahutdinov/activerecord-data_integrity.svg?branch=master)](https://travis-ci.org/dsalahutdinov/activerecord-data_integrity)
+[![Build Status](https://travis-ci.org/dsalahutdinov/activerecord-data_integrity.svg?branch=master)](https://travis-ci.org/dsalahutdinov/activerecord-data_integrity.svg?branch=master)
 
 # ActiveRecord::DataIntegrity
 
