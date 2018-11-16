@@ -5,14 +5,14 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'active_record/data_integrity/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'dbcop'
+  spec.name          = 'activerecord-data_integrity'
   spec.version       = ActiveRecord::DataIntegrity::VERSION
   spec.authors       = ['Salahutdinov Dmitry']
   spec.email         = ['dsalahutdinov@gmail.com']
 
   spec.summary       = 'Checks your ActiveRecord models to match data integrity principles and rules'
   spec.description   = 'CLI-tool to check data integrity of the Rails-application project'
-  spec.homepage      = 'https://github.com/dsalahutdinov/dbcop'
+  spec.homepage      = 'https://github.com/dsalahutdinov/activerecord-data_integrity'
   spec.license       = 'MIT'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'

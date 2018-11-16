@@ -15,7 +15,7 @@ module ActiveRecord
           end
         end
 
-        Dbcop::Collector.render
+        ActiveRecord::DataIntegrity::Collector.render
 
         exit(1) if results.include?(false)
       end
@@ -23,7 +23,7 @@ module ActiveRecord
       private
 
       def cops
-        @cops ||= Dbcop::Cop.descendants
+        @cops ||= ActiveRecord::DataIntegrity::Cop.descendants
       end
 
       def require_rails
