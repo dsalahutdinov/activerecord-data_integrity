@@ -1,15 +1,18 @@
 sudo: require
-
 services:
-  - docker
-
+- docker
 install:
-  - gem install dip
-
+- gem install dip
 before_script:
-  - unset BUNDLE_GEMFILE
-  - dip provision
-
+- unset BUNDLE_GEMFILE
+- dip provision
 script:
-  - dip rspec
-  - dip rubocop
+- dip rspec
+- dip rubocop
+deploy:
+  provider: rubygems
+  api_key:
+    secure: ILU6srwid/tAV00OmpcR4hpyTHO8TWK4C1wIYxmt+v0f/g8BuzsaZ/iXLM8aXWu7uRGeyp9jV0kA8Dg4KTCq4FlTazo3u2al7wm840h2KhB/mj/QxN8GBIr6hySQaouwRfzVRpVr7KBcHp10ElBd9GXhVm5v5V/j14RYW9wELqwQSyBnAjv2AI8InHJZE+tGnioqqSQHv7bM3fEnOMyd7BGwnvmVIQS2RbW+65i1r8iTFOrR+cpL1lg+q1Kbk0tr1ciEyg0kkNvZ/DUu8AxNMIlZlSdcNL73BN5a/CtJaAclSHbwEr2yGg3fFT61SR20/RmhE45v+crE8sKP+xGxhqkg+GL+LQQ5ouDuHi6r2tLOTMyeVUs402AWBth8dWyd1Xcvbho7owSLlUirYD8clD4Kh+XyfKMC1p4cjJiR4Id1F0089o12GcrwQebaYphnbrCYEtcoC8gts9p1fDiiY9ekrMfh8GcpYIHDmKbmpx79bCRk4Z45qdyOP206df2/pDEqLCEs5YoCP/rNpTi0ft1nRomlBPoX6ZeSrle9f3wbmp49Jrn/j3jENth24jkDpdE7D0Tr8nyGARTR/RG3K3XuXTTkCWQRynSM/CbitnLaRFv4+1ngQnpmiYOzHzcwSpMul9tLnQj3GeMXUawBs/OYD61NgG+FBczIQ295JO8=
+  gem: activerecord-data_integrity
+  on:
+    tags: true
