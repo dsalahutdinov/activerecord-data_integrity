@@ -31,8 +31,8 @@ module ActiveRecord
 
         def group_data_by_cop_name
           data.each_with_object({}) do |item, hash|
-            hash[item[:cop].name] ||= []
-            hash[item[:cop].name] << item
+            hash[item[:cop].class.cop_name] ||= []
+            hash[item[:cop].class.cop_name] << item
           end
         end
       end

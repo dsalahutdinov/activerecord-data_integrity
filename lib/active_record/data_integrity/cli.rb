@@ -1,12 +1,17 @@
 # frozen_string_literal: true
 
+require_relative 'options'
+
 module ActiveRecord
   module DataIntegrity
     # CLI application class
     class CLI
+      attr_reader :options
+
       def initialize; end
 
-      def run
+      def run(args = ARGV)
+        @options = Options.new(args)
         require_rails
 
         results = cops.map do |cop_class|
@@ -23,7 +28,11 @@ module ActiveRecord
       private
 
       def cops
-        @cops ||= ActiveRecord::DataIntegrity::Cop.descendants
+        @cops ||= begin
+          ActiveRecord::DataIntegrity::Cop.descendants.select do |cop|
+            options.only.empty? || cop.cop_name.in?(options.only)
+          end
+        end
       end
 
       def require_rails

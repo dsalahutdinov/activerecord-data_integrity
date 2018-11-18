@@ -11,8 +11,8 @@ module ActiveRecord
         @model = model
       end
 
-      def name
-        self.class.name.gsub('ActiveRecord::DataIntegrity::', '').gsub('::', '/')
+      def self.cop_name
+        name.gsub('ActiveRecord::DataIntegrity::', '').gsub('::', '/')
       end
 
       def log(msg)
