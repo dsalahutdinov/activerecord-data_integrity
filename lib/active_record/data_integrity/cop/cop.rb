@@ -20,7 +20,10 @@ module ActiveRecord
       end
 
       def progress(subresult, false_char = 'E')
-        ActiveRecord::DataIntegrity::Collector.progress(self, subresult ? '.' : false_char)
+        ActiveRecord::DataIntegrity::Collector.progress(
+          self,
+          subresult ? Rainbow('.').green : Rainbow(false_char).red
+        )
       end
     end
   end
