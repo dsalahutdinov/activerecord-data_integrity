@@ -29,12 +29,19 @@ Accordance/TablePresence: Stat::Hourly has no underlying table hourly_stats
 ...
 ```
 
+## Options
+
+Check only specified database rules:
+```
+  bundle exec data_integrity --only HasMany/ForeignKey,BelongsTo/ForeignKey
+```
+
 ## Supported Issues
 
 For now tool checks the following issues:
- - [x] The lack of database foreign keys for belongs_to/has_many associations
- - [x] The lack of not-null constraint for the columns with presence validation
- - [x] Inclusion validated colums should have `enum` data type
+ - [x] The lack of database foreign keys for belongs_to/has_many associations (`HasMany/ForeignKey` and `BelongsTo/ForeignKey` rule)
+ - [x] The lack of not-null constraint for the columns with presence validation (`Validation/Presence` rule)
+ - [x] Inclusion validated colums should have `enum` data type (`Validation/Inclusion` rule)
 
 ## Roadmap (TODO & Help Wanted)
 
@@ -42,13 +49,11 @@ For now tool checks the following issues:
  - [ ] presence of `dependend` option set for association and not confliction with underlying `ON DELETE` option of foreign key contraint
  - [ ] check for foreign keys to have bigint data type
  - [ ] presence of index for the foreign keys search
- - [ ] checks for paranoia models and indexes excludion "removed" rows
+ - [ ] checks for paranoia models and indexes exclusion "removed" rows
 
 2) Config for exluding some rules for the specific models (rubocop like)
 
 3) Autofix for the fixing the issue, mostly by generating safe migrations
-
-4) Possibility to run with checking only specific rule
 
 ## Contributing
 
