@@ -4,7 +4,7 @@
 # ActiveRecord::DataIntegrity
 
 Checks your ActiveRecord models to match data integrity principles and rules.
-Out of the box it enforces many issues such as the lack of foreign keys.
+Out of the box it detects many issues such as the lack of foreign keys.
 
 ## Intallation
 ```ruby
