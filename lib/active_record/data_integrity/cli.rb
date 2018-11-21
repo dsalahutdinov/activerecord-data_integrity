@@ -1,25 +1,24 @@
 # frozen_string_literal: true
 
 require 'thor'
-require_relative 'options'
+require_relative 'config'
 
 module ActiveRecord
   module DataIntegrity
     # CLI application class
     class CLI < Thor
-      attr_reader :options
-
-      desc 'check [OPTIONS]', 'Runs the data integrity check'
+      desc 'check [OPTIONS] [MODEL_NAMES]', 'Runs the data integrity check'
       method_option :only,
                     type: :string,
                     desc: 'List of the rules to check, separated with comma' \
                           ', e.g. --only BelongsTo/ForeignKey,Accordance/PrimaryKey'
-      def check(_args = ARGV)
-        @options = Options.new(options)
+      def check(*model_names)
+        config = Config.new(options.merge(model_names: model_names))
+
         require_rails
 
-        results = cops.map do |cop_class|
-          ActiveRecord::Base.descendants.each do |model|
+        results = config.cops.map do |cop_class|
+          config.models.each do |model|
             cop_class.new(model).call
           end
         end
@@ -37,14 +36,6 @@ module ActiveRecord
       map %w[--version -v] => :version
 
       private
-
-      def cops
-        @cops ||= begin
-          ActiveRecord::DataIntegrity::Cop.descendants.select do |cop|
-            options.only.empty? || cop.cop_name.in?(options.only)
-          end
-        end
-      end
 
       def require_rails
         # Rails load ugly hack :)

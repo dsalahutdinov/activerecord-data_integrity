@@ -31,9 +31,13 @@ Accordance/TablePresence: Stat::Hourly has no underlying table hourly_stats
 
 ## Options
 
-Check only specified database rules:
+Check only specified database rules with `--only` options:
 ```
   bundle exec data_integrity --only HasMany/ForeignKey,BelongsTo/ForeignKey
+```
+Check only specified model with the list of the model full with:
+```sh
+  bundle exec data_integrity --only HasMany/ForeignKye Billing::Account User
 ```
 
 ## Supported Issues

@@ -16,3 +16,6 @@ Metrics/LineLength:
 Metrics/BlockLength:
   Exclude:
    - 'spec/**/*'
+
+RSpec/MultipleExpectations:
+  Max: 3
