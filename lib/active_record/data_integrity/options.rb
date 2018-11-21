@@ -6,14 +6,10 @@ module ActiveRecord
   module DataIntegrity
     # Options parser
     class Options
-      def initialize(args)
-        @options = {}
-
-        OptionParser.new do |opts|
-          opts.on('-o', '--only [COP1,COP2,...]') do |list|
-            @options[:only] = list.to_s.split(',') if list.present?
-          end
-        end.parse(args)
+      def initialize(options)
+        @options = {
+          only: options.only? ? options[:only].to_s.split(',') : nil
+        }
       end
 
       def only

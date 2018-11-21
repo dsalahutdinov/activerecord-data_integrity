@@ -1,17 +1,21 @@
 # frozen_string_literal: true
 
+require 'thor'
 require_relative 'options'
 
 module ActiveRecord
   module DataIntegrity
     # CLI application class
-    class CLI
+    class CLI < Thor
       attr_reader :options
 
-      def initialize; end
-
-      def run(args = ARGV)
-        @options = Options.new(args)
+      desc 'check [OPTIONS]', 'Runs the data integrity check'
+      method_option :only,
+                    type: :string,
+                    desc: 'List of the rules to check, separated with comma' \
+                          ', e.g. --only BelongsTo/ForeignKey,Accordance/PrimaryKey'
+      def check(_args = ARGV)
+        @options = Options.new(options)
         require_rails
 
         results = cops.map do |cop_class|
@@ -24,6 +28,13 @@ module ActiveRecord
 
         exit(1) if results.include?(false)
       end
+      default_task :check
+
+      desc 'version', 'Print the current version'
+      def version
+        puts ActiveRecord::DataIntegrity::VERSION
+      end
+      map %w[--version -v] => :version
 
       private
 
