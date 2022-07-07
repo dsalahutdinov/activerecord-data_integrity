@@ -5,7 +5,6 @@ class CreateBelongsToTables < ActiveRecord::Migration[5.2]
     create_table :belongs_to_users, &:timestamps
 
     create_table :belongs_to_user_settings do |t|
-      t.integer :user_id
       t.references :user, foreign_key: { to_table: :belongs_to_users }
       t.text :data
 

@@ -18,8 +18,8 @@ module ActiveRecord
         require_rails
 
         results = config.cops.map do |cop_class|
-          config.models.each do |model|
-            cop_class.new(model).call
+          config.models_for(cop_class).each do |model|
+            cop_class.new(model, cop_config: config.config_for(cop_class)).call
           end
         end
 

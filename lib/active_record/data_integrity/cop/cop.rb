@@ -4,11 +4,12 @@ module ActiveRecord
   module DataIntegrity
     # Checking cop base class
     class Cop
-      attr_reader :model
+      attr_reader :model, :cop_config
       delegate :connection, to: :model
 
-      def initialize(model)
+      def initialize(model, cop_config: CopConfig.new(config_hash: {}))
         @model = model
+        @cop_config = cop_config
       end
 
       def self.cop_name
@@ -24,6 +25,10 @@ module ActiveRecord
           self,
           subresult ? Rainbow('.').green : Rainbow(false_char).red
         )
+      end
+
+      def config
+        @config ||= Config.new({})
       end
     end
   end

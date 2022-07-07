@@ -1,5 +1,6 @@
 test:
   adapter: postgresql
-  host: <%= ENV.fetch("DB_HOST") %>
-  database: <%= ENV.fetch("DB_NAME") %>
-  username: <%= ENV.fetch("DB_USERNAME") %>
+  host: <%= ENV.fetch("DB_HOST", "localhost") %>
+  database: <%= ENV.fetch("DB_NAME", "ar_di_test") %>
+  username: <%= ENV.fetch("DB_USERNAME", "root") %>
+  port: <%= ENV.fetch("DB_PORT", 5432) %>

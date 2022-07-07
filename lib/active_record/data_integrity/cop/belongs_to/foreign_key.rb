@@ -19,6 +19,7 @@ module ActiveRecord
 
         def valid?(association)
           success = foreign_key?(association)
+
           unless success
             to_table = association.class_name.constantize.table_name
             log("belongs_to #{association.name} but has no foreign key to #{to_table}.id")
@@ -42,7 +43,11 @@ module ActiveRecord
           to_table = association.class_name.constantize.table_name
           connection.foreign_keys(model.table_name).any? do |foreign_key|
             foreign_key.to_table == to_table && foreign_key.options.fetch(:primary_key) == 'id'
-          end
+          end || excluded_key?("#{to_table}.id") || excluded_key?(association.name)
+        end
+
+        def excluded_key?(name)
+          cop_config.ignored_foreign_keys.any? { |key| name.match?(key) }
         end
       end
     end

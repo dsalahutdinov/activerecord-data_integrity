@@ -36,13 +36,19 @@ module ActiveRecord
             .values
             .select { |association| association.is_a?(ActiveRecord::Reflection::HasManyReflection) }
             .reject(&:polymorphic?)
+            .reject { |assoc| assoc.options[:as].present? }
         end
 
         def foreign_key?(association)
           to_table = model.table_name
+          from_table = association.class_name.constantize.table_name
           connection.foreign_keys(association.class_name.constantize.table_name).any? do |foreign_key|
             foreign_key.to_table == to_table && foreign_key.options.fetch(:primary_key) == 'id'
-          end
+          end || excluded_key?("#{from_table}.id") || excluded_key?(association.name)
+        end
+
+        def excluded_key?(name)
+          cop_config.ignored_foreign_keys.any? { |key| name.match?(key) }
         end
       end
     end
