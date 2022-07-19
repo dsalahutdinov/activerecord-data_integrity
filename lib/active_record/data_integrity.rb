@@ -2,7 +2,7 @@
 
 require 'active_record/data_integrity/version'
 
-require 'rails/all'
+require 'active_record'
 require 'active_record/data_integrity/cli'
 require 'rainbow'
 

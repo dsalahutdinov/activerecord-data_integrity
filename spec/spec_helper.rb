@@ -5,8 +5,12 @@ require 'activerecord/data_integrity'
 require 'byebug'
 
 require 'combustion'
-Combustion.initialize! :all,
-                       database_reset: true, database_migrate: true, load_schema: false
+Combustion.initialize!(
+  :active_record,
+  database_reset: true,
+  database_migrate: true,
+  load_schema: false
+)
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
