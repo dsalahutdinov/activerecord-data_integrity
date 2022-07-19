@@ -14,18 +14,14 @@ module ActiveRecord
       end
 
       def cops
-        @cops ||= begin
-          ActiveRecord::DataIntegrity::Cop.descendants.select do |cop|
-            only.empty? || cop.cop_name.in?(only)
-          end
+        @cops ||= ActiveRecord::DataIntegrity::Cop.descendants.select do |cop|
+          only.empty? || cop.cop_name.in?(only)
         end
       end
 
       def models
-        @models ||= begin
-          ActiveRecord::Base.descendants.select do |model|
-            model_names.empty? || model.name.in?(model_names)
-          end
+        @models ||= ActiveRecord::Base.descendants.select do |model|
+          model_names.empty? || model.name.in?(model_names)
         end
       end
     end

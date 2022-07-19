@@ -1,5 +1,5 @@
 [![Gem Version](https://badge.fury.io/rb/activerecord-data_integrity.svg)](https://badge.fury.io/rb/activerecord-data_integrity)
-[![Build Status](https://travis-ci.org/dsalahutdinov/activerecord-data_integrity.svg?branch=master)](https://travis-ci.org/dsalahutdinov/activerecord-data_integrity.svg?branch=master)
+[![CI Status](https://github.com/dsalahutdinov/activerecord-data_integrity/workflows/CI/badge.svg?branch=master)](https://github.com/dsalahutdinov/activerecord-data_integrity/actions?query=workflow%3ACI+branch%3Amaster)
 
 # ActiveRecord::DataIntegrity
 
@@ -80,8 +80,8 @@ Otherwise (without Docker) set up environment manually:
 git checkout git@github.com:dsalahutdinov/activerecord-data_integrity.git
 cd activerecord-data_integrity
 bundle install
-bundle appraisal
-DB_HOST=localhost DB_NAME=testdb DB_USERNAME=postgres bundle appraisal rspec
+bundle exec appraisal
+DB_HOST=localhost DB_NAME=testdb DB_USERNAME=postgres bundle exec appraisal rspec
 ```
 
 ## License

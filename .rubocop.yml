@@ -1,7 +1,7 @@
 require: rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 2.5
+  TargetRubyVersion: 2.7
   TargetRailsVersion: 4.0
   Exclude:
     - 'activerecord-data_integrity.gemspec'
@@ -9,6 +9,7 @@ AllCops:
     - 'tmp/**/*'
     - 'gemfiles/*'
     - 'spec/internal/**/*'
+    - 'vendor/**/*'
 
 Metrics/LineLength:
   Max: 110
